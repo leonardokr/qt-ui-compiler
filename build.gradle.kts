@@ -7,6 +7,22 @@ plugins {
 group = "com.ziondev"
 version = "1.0.1"
 
+val envFile = file(".env")
+if (envFile.exists()) {
+    envFile.readLines().forEach { line ->
+        val parts = line.split("=", limit = 2)
+        if (parts.size == 2) {
+            val key = parts[0].trim()
+            val value = parts[1].trim()
+            if (key.isNotEmpty()) {
+                System.setProperty(key, value)
+            }
+        }
+    }
+}
+
+fun getEnvOrProperty(key: String): String? = System.getenv(key) ?: System.getProperty(key)
+
 repositories {
     mavenCentral()
 }
@@ -31,12 +47,12 @@ tasks {
     }
 
     signPlugin {
-        certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
-        privateKey.set(System.getenv("PRIVATE_KEY"))
-        password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
+        certificateChain.set(getEnvOrProperty("CERTIFICATE_CHAIN"))
+        privateKey.set(getEnvOrProperty("PRIVATE_KEY"))
+        password.set(getEnvOrProperty("PRIVATE_KEY_PASSWORD"))
     }
 
     publishPlugin {
-        token.set(System.getenv("PUBLISH_TOKEN"))
+        token.set(getEnvOrProperty("PUBLISH_TOKEN"))
     }
 }

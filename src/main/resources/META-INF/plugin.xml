@@ -1,0 +1,50 @@
+<idea-plugin>
+    <id>com.ziondev.qt-ui-compiler</id>
+    <name>Qt UI Compiler</name>
+    <vendor email="leo@ziondev.us">ZionDev</vendor>
+
+    <description><![CDATA[
+    <p>The <b>Qt UI Compiler</b> automates the conversion of Qt Designer <code>.ui</code> files to Python (PyQt6/PySide6).</p>
+
+    <ul>
+        <li><b>Automatic Compilation:</b> Generates .py files instantly upon saving changes to the .ui file.</li>
+        <li><b>Full Integration:</b> Shortcuts and context menus for manual compilation.</li>
+        <li><b>Flexible:</b> Support for virtual environments (venv), relative paths, and glob file filters.</li>
+    </ul>
+
+    <p>Configure it in <i>Settings | Tools | Qt UI Compiler</i> to get started.</p>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable 
+            parentId="tools" 
+            instance="com.ziondev.qtui.settings.QtUiCompilerConfigurable"
+            id="com.ziondev.qtui.settings.QtUiCompilerConfigurable"
+            displayName="Qt UI Compiler"/>
+        
+        <applicationService 
+            serviceImplementation="com.ziondev.qtui.settings.QtUiCompilerSettings"/>
+            
+        <notificationGroup id="Qt UI Compiler" displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <action id="com.ziondev.qtui.actions.CompileUiFileAction" 
+                class="com.ziondev.qtui.actions.CompileUiFileAction" 
+                text="Compile UI File" 
+                description="Compile selected .ui file">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
+            <add-to-group group-id="EditorTabPopupMenu" anchor="first"/>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="control alt U"/>
+        </action>
+    </actions>
+
+    <projectListeners>
+        <listener class="com.ziondev.qtui.listeners.UiFileChangeListener"
+                  topic="com.intellij.openapi.vfs.newvfs.BulkFileListener"/>
+    </projectListeners>
+</idea-plugin>

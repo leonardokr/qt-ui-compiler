@@ -1,5 +1,9 @@
 # Qt UI Compiler
 
+[![JetBrains Plugins](https://img.shields.io/jetbrains/plugin/v/29493.svg)](https://plugins.jetbrains.com/plugin/29493-qt-ui-compiler)
+[![JetBrains Plugins](https://img.shields.io/jetbrains/plugin/d/29493.svg)](https://plugins.jetbrains.com/plugin/29493-qt-ui-compiler)
+[![JetBrains Plugins](https://img.shields.io/jetbrains/plugin/r/rating/29493.svg)](https://plugins.jetbrains.com/plugin/29493-qt-ui-compiler)
+
 Automated conversion of Qt Designer `.ui` files to Python (`PyQt6` or `PySide6`) for IntelliJ-based IDEs.
 
 ## Overview
@@ -7,8 +11,6 @@ Automated conversion of Qt Designer `.ui` files to Python (`PyQt6` or `PySide6`)
 The **Qt UI Compiler** is an extension for Python developers that automates the generation of Python code from Qt XML
 user interface files. It ensures that the visual design remains synchronized with the implementation by monitoring
 changes and invoking the appropriate compilation tools (`pyuic6` or `pyside6-uic`) automatically.
-
-## Key Features
 
 - **Automatic Compilation:** Detects modifications in `.ui` files and generates the corresponding `.py` files instantly
   upon saving.

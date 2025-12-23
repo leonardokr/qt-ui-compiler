@@ -1,108 +1,72 @@
-# Qt UI Compiler Plugin
+# Qt UI Compiler
 
-IntelliJ plugin to automatically compile PyQt6/PySide6 .ui files.
+Automated conversion of Qt Designer `.ui` files to Python (`PyQt6` or `PySide6`) for IntelliJ-based IDEs.
 
-## Features
+## Overview
 
-- Automatic compilation of .ui files when changes are detected
-- Flexible virtual environment and UIC executable configuration
-- Support for custom file patterns
-- Output path configuration with regex support
-- Manual action to compile specific .ui files
-- Auto-detection of PyQt6 vs PySide6
+The **Qt UI Compiler** is an extension for Python developers that automates the generation of Python code from Qt XML
+user interface files. It ensures that the visual design remains synchronized with the implementation by monitoring
+changes and invoking the appropriate compilation tools (`pyuic6` or `pyside6-uic`) automatically.
+
+## Key Features
+
+- **Automatic Compilation:** Detects modifications in `.ui` files and generates the corresponding `.py` files instantly
+  upon saving.
+- **Manual Execution:** Provides context menu actions and keyboard shortcuts (`Ctrl+Alt+U`) for on-demand compilation.
+- **Environment Awareness:** Supports virtual environments (`venv`) and custom executable paths.
+- **Flexible Configuration:** Offers glob pattern filtering for targeted file monitoring and customizable output paths.
+- **I18n Support:** Fully internationalized interface and notifications.
+- **Cross-Platform:** Compatible with Windows, macOS, and Linux.
+
+## Installation
+
+The plugin can be installed via the JetBrains Marketplace within any compatible IDE (IntelliJ IDEA, PyCharm, etc.):
+
+1. Navigate to **Settings/Preferences | Plugins**.
+2. Search for **Qt UI Compiler**.
+3. Click **Install**.
 
 ## Configuration
 
-Go to **File > Settings > Tools > Qt UI Compiler** to configure:
+Settings are located under **Settings/Preferences | Tools | Qt UI Compiler**.
 
-- **Virtual Environment Path**: Path to virtual environment (default: .venv)
-- **UIC Path**: Path to pyside6-uic or pyuic6 executable (auto-detected if empty)
-- **UI File Pattern**: Pattern for .ui files (default: **/*.ui)
-- **Output Path**: Output path (default: same location as .ui file)
-- **Enable auto-compilation**: Enable automatic compilation
-- **Use relative paths**: Use paths relative to project
+### Environment Settings
+
+- **Virtual Environment Path:** Specify the path to the project's virtual environment (default: `.venv`).
+- **Custom UIC Path:** Optional path to a specific `uic` executable if auto-detection is not sufficient.
+- **Relative Paths:** Toggle whether the paths above are interpreted relative to the project root.
+
+### Compilation Settings
+
+- **Enable auto-compilation:** Globally enable or disable background compilation on save.
+- **UI Files Filter:** Use glob patterns (e.g., `**/ui/*.ui`) to define which files the plugin should process (default:
+  `*.ui`).
+- **Output Path/Pattern:** Define where the generated `.py` files should be stored. Use `$1` as a placeholder for the
+  original filename.
 
 ## Usage
 
-1. Configure the plugin in settings
-2. Edit .ui files - they will be compiled automatically
-3. Or right-click on a .ui file and select "Compile UI File"
+1. Configure the environment and compilation settings.
+2. The plugin will monitor files matching the defined pattern.
+3. Upon saving a `.ui` file, the corresponding `.py` file is generated or updated.
+4. Alternatively, right-click a `.ui` file in the **Project View** or **Editor** and select **Compile UI File**.
 
-## Build
+## Building from Source
 
 ### Prerequisites
-- Java 17 or higher
-- Gradle 8.0+ (or use the wrapper)
 
-### Building the Plugin
+- Java 17
+- Gradle (provided via wrapper)
 
-**Option 1: Using Gradle (if installed)**
+### Build Steps
+
+To build the plugin distribution:
 ```bash
-gradle buildPlugin
+./gradlew buildPlugin
 ```
 
-**Option 2: Download Gradle**
-1. Download Gradle from https://gradle.org/releases/
-2. Extract and add to PATH
-3. Run: `gradle buildPlugin`
+The resulting ZIP file will be located in `build/distributions/`.
 
-**Option 3: Use IntelliJ IDEA**
-1. Open project in IntelliJ IDEA
-2. Run Gradle task: `buildPlugin`
+## License
 
-The built plugin will be in `build/distributions/qt-ui-compiler-1.0-SNAPSHOT.zip`
-
-### Installing for Testing
-1. Go to **File > Settings > Plugins**
-2. Click gear icon > **Install Plugin from Disk**
-3. Select the .zip file from `build/distributions/`
-4. Restart IntelliJ IDEA
-
-## Publishing to JetBrains Marketplace
-
-### 1. Prepare for Publishing
-Update `build.gradle.kts`:
-```kotlin
-group = "com.ziondev"
-version = "1.0.0"
-
-patchPluginXml {
-    changeNotes.set("""
-        <ul>
-            <li>Initial release</li>
-            <li>Auto-compile .ui files on change</li>
-            <li>Support for PyQt6 and PySide6</li>
-            <li>Configurable paths and patterns</li>
-        </ul>
-    """)
-}
-```
-
-### 2. Create JetBrains Account
-1. Go to https://plugins.jetbrains.com/
-2. Sign in with JetBrains account
-3. Go to "Upload plugin"
-
-### 3. Upload Plugin
-1. Build plugin: `gradle buildPlugin`
-2. Upload the .zip file from `build/distributions/`
-3. Fill in plugin details:
-   - **Name**: Qt UI Compiler
-   - **Description**: Automatically compile PyQt6/PySide6 .ui files
-   - **Category**: Build Tools
-   - **Tags**: PyQt6, PySide6, Qt, UI, Python
-
-### 4. Plugin Review Process
-- JetBrains reviews all plugins
-- Usually takes 1-3 business days
-- You'll receive email notifications about status
-
-### 5. Automated Publishing (Optional)
-Add to `build.gradle.kts`:
-```kotlin
-publishPlugin {
-    token.set(System.getenv("PUBLISH_TOKEN"))
-}
-```
-
-Get token from: https://plugins.jetbrains.com/author/me/tokens
+This project is licensed under the terms specified in the repository.

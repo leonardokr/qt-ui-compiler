@@ -2,6 +2,7 @@ package com.ziondev.qtui.actions
 
 import com.ziondev.qtui.services.UiCompilerService
 import com.ziondev.qtui.utils.UiFileDetector
+import com.ziondev.qtui.QtUiCompilerBundle
 import com.intellij.notification.NotificationGroupManager
 import com.intellij.notification.NotificationType
 import com.intellij.openapi.actionSystem.ActionUpdateThread
@@ -27,7 +28,11 @@ class CompileUiFileAction : AnAction() {
         } else {
             NotificationGroupManager.getInstance()
                 .getNotificationGroup("Qt UI Compiler")
-                ?.createNotification("Qt UI Compiler", "Not a UI file: ${virtualFile.name}", NotificationType.WARNING)
+                ?.createNotification(
+                    QtUiCompilerBundle.message("notification.title"), 
+                    QtUiCompilerBundle.message("notification.error.not.ui.file", virtualFile.name), 
+                    NotificationType.WARNING
+                )
                 ?.notify(project)
         }
     }

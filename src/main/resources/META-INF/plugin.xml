@@ -17,12 +17,14 @@
 
     <depends>com.intellij.modules.platform</depends>
 
+    <resource-bundle>messages.QtUiCompilerBundle</resource-bundle>
+
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable 
             parentId="tools" 
             instance="com.ziondev.qtui.settings.QtUiCompilerConfigurable"
             id="com.ziondev.qtui.settings.QtUiCompilerConfigurable"
-            displayName="Qt UI Compiler"/>
+            key="settings.displayName"/>
         
         <applicationService 
             serviceImplementation="com.ziondev.qtui.settings.QtUiCompilerSettings"/>
@@ -32,9 +34,7 @@
 
     <actions>
         <action id="com.ziondev.qtui.actions.CompileUiFileAction" 
-                class="com.ziondev.qtui.actions.CompileUiFileAction" 
-                text="Compile UI File" 
-                description="Compile selected .ui file">
+                class="com.ziondev.qtui.actions.CompileUiFileAction">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
             <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
             <add-to-group group-id="EditorTabPopupMenu" anchor="first"/>

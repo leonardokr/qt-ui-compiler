@@ -61,7 +61,7 @@ object UiFileDetector {
             }
 
             false
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             isExtensionUi
         }
     }

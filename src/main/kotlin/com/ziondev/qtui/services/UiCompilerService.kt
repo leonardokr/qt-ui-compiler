@@ -1,8 +1,8 @@
 package com.ziondev.qtui.services
 
 import com.ziondev.qtui.settings.QtUiCompilerSettings
+import com.ziondev.qtui.QtUiCompilerBundle
 import com.intellij.execution.configurations.GeneralCommandLine
-import com.intellij.execution.process.ProcessHandler
 import com.intellij.execution.process.ProcessHandlerFactory
 import com.intellij.execution.process.ProcessListener
 import com.intellij.execution.process.ProcessEvent
@@ -32,9 +32,11 @@ class UiCompilerService(private val project: Project) {
                 
                 val uicExecutable = findUicExecutable(projectPath, settings.state)
                 if (uicExecutable == null) {
-                    val message = "UIC executable not found. Please check your settings.\n" +
-                                 "Looking in: ${settings.state.virtualEnvironmentPath}\n" +
-                                 "Custom path: ${settings.state.uicPath}"
+                    val message = QtUiCompilerBundle.message(
+                        "notification.error.uic.not.found",
+                        settings.state.virtualEnvironmentPath,
+                        settings.state.uicPath
+                    )
                     showNotification(message, NotificationType.ERROR)
                     return@executeOnPooledThread
                 }
@@ -75,13 +77,19 @@ class UiCompilerService(private val project: Project) {
                 processHandler.addProcessListener(object : ProcessListener {
                     override fun processTerminated(event: ProcessEvent) {
                         if (event.exitCode == 0) {
-                            showNotification("Successfully compiled ${uiFile.name} to ${outputFile.name}", NotificationType.INFORMATION)
+                            showNotification(
+                                QtUiCompilerBundle.message("notification.success.compiled", uiFile.name, outputFile.name),
+                                NotificationType.INFORMATION
+                            )
                             
                             ApplicationManager.getApplication().invokeLater {
                                 LocalFileSystem.getInstance().refreshAndFindFileByIoFile(outputFile)
                             }
                         } else {
-                            showNotification("Failed to compile ${uiFile.name}. Exit code: ${event.exitCode}. Check logs for details.", NotificationType.ERROR)
+                            showNotification(
+                                QtUiCompilerBundle.message("notification.error.compilation.failed", uiFile.name, event.exitCode),
+                                NotificationType.ERROR
+                            )
                         }
                     }
                     
@@ -157,7 +165,7 @@ class UiCompilerService(private val project: Project) {
             val process = ProcessBuilder(checkCommand).start()
             process.waitFor(1, TimeUnit.SECONDS)
             process.exitValue() == 0
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             false
         }
     }
@@ -196,7 +204,7 @@ class UiCompilerService(private val project: Project) {
     
     private fun showNotification(content: String, type: NotificationType) {
         val group = NotificationGroupManager.getInstance().getNotificationGroup("Qt UI Compiler")
-        group?.createNotification("Qt UI Compiler", content, type)?.notify(project)
+        group?.createNotification(QtUiCompilerBundle.message("notification.title"), content, type)?.notify(project)
     }
 
     companion object {

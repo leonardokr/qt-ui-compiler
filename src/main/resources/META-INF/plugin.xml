@@ -28,8 +28,8 @@
         
         <applicationService 
             serviceImplementation="com.ziondev.qtui.settings.QtUiCompilerSettings"/>
-            
-        <notificationGroup id="Qt UI Compiler" displayType="BALLOON"/>
+
+        <notificationGroup id="Qt UI Compiler" displayType="BALLOON" key="notification.group.name"/>
     </extensions>
 
     <actions>

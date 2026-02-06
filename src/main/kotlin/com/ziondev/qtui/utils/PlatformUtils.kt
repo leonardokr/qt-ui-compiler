@@ -62,9 +62,32 @@ object PlatformUtils {
     )
 
     /**
-     * System executables to search in PATH when venv executables are not found.
+     * Known paths to search for PyQt5's pyuic5 executable within a virtual environment.
      */
-    val systemExecutables: List<String> = listOf("pyuic6", "pyside6-uic")
+    fun getPyQt5Paths(venvPath: String): List<String> = listOf(
+        "$venvPath${File.separator}$scriptsDir${File.separator}pyuic5$executableExtension",
+        "$venvPath${File.separator}bin${File.separator}pyuic5",
+        "$venvPath${File.separator}Lib${File.separator}site-packages${File.separator}PyQt5${File.separator}pyuic5$executableExtension"
+    )
+
+    /**
+     * Known paths to search for PySide2's pyside2-uic executable within a virtual environment.
+     */
+    fun getPySide2Paths(venvPath: String): List<String> = listOf(
+        "$venvPath${File.separator}$scriptsDir${File.separator}pyside2-uic$executableExtension",
+        "$venvPath${File.separator}bin${File.separator}pyside2-uic",
+        "$venvPath${File.separator}Lib${File.separator}site-packages${File.separator}PySide2${File.separator}pyside2-uic$executableExtension"
+    )
+
+    /**
+     * System executables to search in PATH when venv executables are not found.
+     * Ordered by preference: Qt6 first, then Qt5, then native uic.
+     */
+    val systemExecutables: List<String> = listOf(
+        "pyuic6", "pyside6-uic",  // Qt6 Python bindings
+        "pyuic5", "pyside2-uic",  // Qt5 Python bindings
+        "uic"                      // Native Qt uic (C++)
+    )
 
     /**
      * The command to check if an executable exists in PATH.

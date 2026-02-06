@@ -243,10 +243,15 @@ class UiCompilerService(private val project: Project) {
     }
 
     private fun findExecutableInVenv(venvPath: String): String? {
-        val pyqt6Paths = PlatformUtils.getPyQt6Paths(venvPath)
-        val pyside6Paths = PlatformUtils.getPySide6Paths(venvPath)
+        // Try Qt6 bindings first, then Qt5
+        val allPaths = listOf(
+            PlatformUtils.getPyQt6Paths(venvPath),
+            PlatformUtils.getPySide6Paths(venvPath),
+            PlatformUtils.getPyQt5Paths(venvPath),
+            PlatformUtils.getPySide2Paths(venvPath)
+        ).flatten()
 
-        return (pyqt6Paths + pyside6Paths).firstOrNull { File(it).exists() }
+        return allPaths.firstOrNull { File(it).exists() }
     }
 
     private fun findExecutableInSystemPath(): String? {

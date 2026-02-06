@@ -49,7 +49,7 @@ class QtUiCompilerConfigurable : BoundConfigurable(QtUiCompilerBundle.message("s
                     }
                     .comment(QtUiCompilerBundle.message("settings.uicPath.comment"))
             }
-            row {
+            row(QtUiCompilerBundle.message("settings.pathMode")) {
                 checkBox(QtUiCompilerBundle.message("settings.useRelativePaths"))
                     .bindSelected(settings.state::useRelativePaths)
             }

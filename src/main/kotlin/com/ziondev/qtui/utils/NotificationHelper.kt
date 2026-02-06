@@ -13,8 +13,12 @@ object NotificationHelper {
 
     private const val NOTIFICATION_GROUP_ID = "Qt UI Compiler"
 
+    /** Default expiration time for notifications in milliseconds. */
+    private const val NOTIFICATION_EXPIRE_MS = 3000L
+
     /**
      * Shows a notification with the given content and type.
+     * The notification will automatically expire after the configured time.
      *
      * @param project The project context for the notification.
      * @param content The notification message content.
@@ -22,11 +26,20 @@ object NotificationHelper {
      */
     fun show(project: Project, content: String, type: NotificationType) {
         val group = NotificationGroupManager.getInstance().getNotificationGroup(NOTIFICATION_GROUP_ID)
-        group?.createNotification(
+        val notification = group?.createNotification(
             QtUiCompilerBundle.message("notification.title"),
             content,
             type
-        )?.notify(project)
+        )
+
+        notification?.notify(project)
+
+        // Auto-expire the notification after the configured time
+        notification?.let {
+            com.intellij.util.Alarm().addRequest({
+                it.expire()
+            }, NOTIFICATION_EXPIRE_MS)
+        }
     }
 
     /**

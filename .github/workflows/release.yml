@@ -1,0 +1,184 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Get latest tag
+        id: latest_tag
+        run: |
+          latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "tag=$latest_tag" >> $GITHUB_OUTPUT
+          echo "Latest tag: $latest_tag"
+
+      - name: Analyze commits for version bump
+        id: version
+        run: |
+          latest_tag="${{ steps.latest_tag.outputs.tag }}"
+
+          version="${latest_tag#v}"
+          IFS='.' read -r major minor patch <<< "$version"
+
+          if [ "$latest_tag" = "v0.0.0" ]; then
+            commits=$(git log --pretty=format:"%s" HEAD)
+          else
+            commits=$(git log --pretty=format:"%s" ${latest_tag}..HEAD)
+          fi
+
+          if [ -z "$commits" ]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          echo "Commits since $latest_tag:"
+          echo "$commits"
+
+          bump="none"
+
+          if echo "$commits" | grep -qiE "^feat(\(.+\))?!:|BREAKING CHANGE"; then
+            bump="major"
+          elif echo "$commits" | grep -qiE "^feat(\(.+\))?:"; then
+            bump="minor"
+          elif echo "$commits" | grep -qiE "^fix(\(.+\))?:|^perf(\(.+\))?:|^refactor(\(.+\))?:"; then
+            bump="patch"
+          fi
+
+          if [ "$bump" = "none" ]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+            echo "No version bump needed (no feat/fix commits)"
+            exit 0
+          fi
+
+          case $bump in
+            major)
+              major=$((major + 1))
+              minor=0
+              patch=0
+              ;;
+            minor)
+              minor=$((minor + 1))
+              patch=0
+              ;;
+            patch)
+              patch=$((patch + 1))
+              ;;
+          esac
+
+          new_version="${major}.${minor}.${patch}"
+          new_tag="v${new_version}"
+
+          echo "skip=false" >> $GITHUB_OUTPUT
+          echo "new_version=$new_version" >> $GITHUB_OUTPUT
+          echo "new_tag=$new_tag" >> $GITHUB_OUTPUT
+          echo "bump=$bump" >> $GITHUB_OUTPUT
+
+          echo "Bump type: $bump"
+          echo "New version: $new_version"
+
+      - name: Update version in build.gradle.kts
+        if: steps.version.outputs.skip != 'true'
+        run: |
+          sed -i "s/^version = \".*\"/version = \"${{ steps.version.outputs.new_version }}\"/" build.gradle.kts
+          cat build.gradle.kts | grep "^version"
+
+      - name: Build Plugin
+        if: steps.version.outputs.skip != 'true'
+        run: ./gradlew buildPlugin
+
+      - name: Run Tests
+        if: steps.version.outputs.skip != 'true'
+        run: ./gradlew test
+
+      - name: Generate changelog
+        if: steps.version.outputs.skip != 'true'
+        id: changelog
+        run: |
+          latest_tag="${{ steps.latest_tag.outputs.tag }}"
+
+          if [ "$latest_tag" = "v0.0.0" ]; then
+            commits=$(git log --pretty=format:"- %s (%h)" HEAD)
+          else
+            commits=$(git log --pretty=format:"- %s (%h)" ${latest_tag}..HEAD)
+          fi
+
+          features=$(echo "$commits" | grep -iE "^- feat" || true)
+          fixes=$(echo "$commits" | grep -iE "^- fix" || true)
+          refactors=$(echo "$commits" | grep -iE "^- refactor" || true)
+          tests=$(echo "$commits" | grep -iE "^- test" || true)
+          others=$(echo "$commits" | grep -viE "^- (feat|fix|refactor|test|chore|docs|style|ci)" || true)
+
+          changelog=""
+
+          if [ -n "$features" ]; then
+            changelog="${changelog}### Features\n${features}\n\n"
+          fi
+
+          if [ -n "$fixes" ]; then
+            changelog="${changelog}### Bug Fixes\n${fixes}\n\n"
+          fi
+
+          if [ -n "$refactors" ]; then
+            changelog="${changelog}### Refactoring\n${refactors}\n\n"
+          fi
+
+          if [ -n "$tests" ]; then
+            changelog="${changelog}### Tests\n${tests}\n\n"
+          fi
+
+          if [ -n "$others" ]; then
+            changelog="${changelog}### Other Changes\n${others}\n\n"
+          fi
+
+          echo -e "$changelog" > changelog.md
+          echo "Generated changelog:"
+          cat changelog.md
+
+      - name: Commit version update
+        if: steps.version.outputs.skip != 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add build.gradle.kts
+          git commit -m "chore: bump version to ${{ steps.version.outputs.new_version }}"
+          git push
+
+      - name: Create tag
+        if: steps.version.outputs.skip != 'true'
+        run: |
+          git tag ${{ steps.version.outputs.new_tag }}
+          git push origin ${{ steps.version.outputs.new_tag }}
+
+      - name: Create Release
+        if: steps.version.outputs.skip != 'true'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.version.outputs.new_tag }}
+          name: Qt UI Compiler ${{ steps.version.outputs.new_tag }}
+          body_path: changelog.md
+          files: build/distributions/*.zip
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

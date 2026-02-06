@@ -36,7 +36,7 @@ object NotificationHelper {
 
         // Auto-expire the notification after the configured time
         notification?.let {
-            com.intellij.util.Alarm().addRequest({
+            com.intellij.util.Alarm(project).addRequest({
                 it.expire()
             }, NOTIFICATION_EXPIRE_MS)
         }

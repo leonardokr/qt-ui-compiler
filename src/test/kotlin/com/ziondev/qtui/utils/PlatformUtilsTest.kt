@@ -85,7 +85,11 @@ class PlatformUtilsTest {
 
     @Test
     fun `systemExecutables contains expected executables`() {
-        assertThat(PlatformUtils.systemExecutables).containsExactly("pyuic6", "pyside6-uic")
+        assertThat(PlatformUtils.systemExecutables).containsExactly(
+            "pyuic6", "pyside6-uic",  // Qt6
+            "pyuic5", "pyside2-uic",  // Qt5
+            "uic"                      // Native Qt
+        )
     }
 
     @Test

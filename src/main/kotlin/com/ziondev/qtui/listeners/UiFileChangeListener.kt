@@ -8,26 +8,30 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.guessProjectDir
 import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.openapi.vfs.newvfs.BulkFileListener
+import com.intellij.openapi.vfs.newvfs.events.VFileContentChangeEvent
 import com.intellij.openapi.vfs.newvfs.events.VFileEvent
 
 class UiFileChangeListener(private val project: Project) : BulkFileListener {
-    
+
     private val logger = Logger.getInstance(UiFileChangeListener::class.java)
-    
+
     override fun after(events: MutableList<out VFileEvent>) {
         val settings = QtUiCompilerSettings.getInstance()
         if (!settings.state.autoCompileEnabled) return
 
         if (project.isDisposed) return
-        
+
         for (event in events) {
-            val file = event.file ?: continue
-            
+            // Only process content change events (file saved/modified)
+            if (event !is VFileContentChangeEvent) continue
+
+            val file = event.file
+
             if (!UiFileDetector.isUiFile(file, project)) continue
 
             val projectDir = project.guessProjectDir()
             val belongsToProject = projectDir?.let { VfsUtil.isAncestor(it, file, false) } ?: false
-            
+
             if (!belongsToProject) continue
 
             val compilerService = UiCompilerService.getInstance(project)

@@ -5,16 +5,40 @@
    viewBox="0 0 462 339"
    version="1.1"
    id="svg2"
-   xmlns="http://www.w3.org/2000/svg">
+   sodipodi:docname="pluginIcon.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="pt"
+     inkscape:zoom="0.5"
+     inkscape:cx="100"
+     inkscape:cy="265"
+     inkscape:window-width="2560"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
   <defs
      id="defs18" />
   <path
      fill="#41cd52"
      d=" M 63.50 0.00 L 462.00 0.00 L 462.00 274.79 C 440.60 296.26 419.13 317.66 397.61 339.00 L 0.00 339.00 L 0.00 63.39 C 21.08 42.18 42.34 21.13 63.50 0.00 Z"
-     id="path6"/>
+     id="path6" />
   <g
      id="g2"
-     transform="matrix(0.77741238,0,0,0.77741238,-12.827238,30.13733)">
+     transform="matrix(0.80238848,0,0,0.80238848,-4.6926567,19.53762)">
     <path
        d="M 66.87,18.83 C 82,8.82 100.71,6.29 118.5,6.45 c 16.94,0.21 34.72,3.18 48.76,13.29 10.2,7.17 16.83,18.24 21.25,29.69 7.15,18.8 9.25,39.1 9.49,59.08 0.03,20.12 -0.88,40.68 -7.54,59.85 -4.46,13.04 -12.95,24.62 -24.15,32.66 8.06,13.06 16.28,26.02 24.34,39.08 -10.13,4.67 -20.23,9.37 -30.37,14.02 -8.63,-14.24 -17.22,-28.51 -25.88,-42.73 -11.71,1.92 -23.69,1.77 -35.46,0.47 C 84.84,210.17 70.47,205.87 59.59,196.38 51.23,189.14 45.98,179.01 42.39,168.71 36.51,151.29 34.93,132.75 34.66,114.47 34.52,94.71 35.78,74.64 41.74,55.68 46.35,41.42 53.98,27.19 66.87,18.83 Z"
        id="path8"
@@ -30,32 +54,27 @@
   </g>
   <text
      xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:215.787px;font-family:'JetBrainsMono Nerd Font';-inkscape-font-specification:'JetBrainsMono Nerd Font';text-align:start;letter-spacing:-13.4866px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ffffff;stroke-width:0.89911"
-     x="2.5359724"
-     y="-286.33167"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:201.043px;font-family:'JetBrainsMono Nerd Font';-inkscape-font-specification:'JetBrainsMono Nerd Font';text-align:start;letter-spacing:-12.5652px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ffffff;stroke-width:0.837679"
+     x="11.097504"
+     y="-293.60193"
      id="text2"
      transform="rotate(90)"><tspan
        id="tspan2"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:215.787px;font-family:'JetBrainsMono Nerd Font';-inkscape-font-specification:'JetBrainsMono Nerd Font Bold';letter-spacing:-13.4866px;stroke-width:0.89911"
-       x="2.5359724"
-       y="-286.33167">UI</tspan></text>
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:201.043px;font-family:'JetBrainsMono Nerd Font';-inkscape-font-specification:'JetBrainsMono Nerd Font Bold';letter-spacing:-12.5652px;stroke-width:0.837679"
+       x="11.097504"
+       y="-293.60193">UI</tspan></text>
   <g
      id="g3"
-     transform="matrix(1.0674371,0,0,1.0674371,-1.3014848,-17.104133)">
+     transform="matrix(1.0333942,0,0,1.0333942,17.355517,-10.808664)">
     <path
        style="font-size:117.534px;font-family:'JetBrainsMono Nerd Font';-inkscape-font-specification:'JetBrainsMono Nerd Font';letter-spacing:-7.34594px;fill:#ffffff;stroke-width:1.05807"
        d="m 37.582393,317.11417 c -5.642946,0 -10.100873,-1.58002 -13.373781,-4.74008 -3.272908,-3.16004 -4.909362,-7.50511 -4.909362,-13.0352 v -27.93258 c 0,-5.53008 1.636454,-9.87515 4.909362,-13.03521 3.272908,-3.16004 7.730835,-4.74007 13.373781,-4.74007 5.530087,0 9.931587,1.60825 13.204497,4.82472 3.2729,3.16005 4.90936,7.4769 4.90936,12.95056 h -7.61798 c 0,-3.49862 -0.93108,-6.17902 -2.79326,-8.04119 -1.80574,-1.91861 -4.37328,-2.87791 -7.702617,-2.87791 -3.329338,0 -5.953308,0.9593 -7.87191,2.87791 -1.862171,1.86217 -2.793257,4.54257 -2.793257,8.04119 v 27.93258 c 0,3.49863 0.931086,6.20724 2.793257,8.12584 1.918602,1.86217 4.542572,2.79326 7.87191,2.79326 3.329337,0 5.896877,-0.93109 7.702617,-2.79326 1.86218,-1.9186 2.79326,-4.62721 2.79326,-8.12584 h 7.61798 c 0,5.47366 -1.63646,9.81873 -4.90936,13.0352 -3.27291,3.16006 -7.67441,4.74008 -13.204497,4.74008 z m 44.819087,0 c -5.53009,0 -9.90338,-1.60824 -13.11986,-4.82472 -3.21648,-3.21648 -4.82472,-7.81548 -4.82472,-13.797 v -26.23969 c 0,-5.98153 1.60824,-10.58053 4.82472,-13.79701 3.21648,-3.21647 7.58977,-4.82472 13.11986,-4.82472 5.53008,0 9.90336,1.60825 13.11984,4.82472 3.21648,3.21648 4.82472,7.78726 4.82472,13.71236 v 26.32434 c 0,5.98152 -1.60824,10.58052 -4.82472,13.797 -3.21648,3.21648 -7.58976,4.82472 -13.11984,4.82472 z m 0,-6.85618 c 3.32934,0 5.86866,-0.93109 7.61797,-2.79326 1.80574,-1.9186 2.70862,-4.62721 2.70862,-8.12584 v -27.93258 c 0,-3.49862 -0.90288,-6.17902 -2.70862,-8.04119 -1.74931,-1.91861 -4.28863,-2.87791 -7.61797,-2.87791 -3.27292,0 -5.81224,0.9593 -7.61799,2.87791 -1.80574,1.86217 -2.70861,4.54257 -2.70861,8.04119 v 27.93258 c 0,3.49863 0.90287,6.20724 2.70861,8.12584 1.80575,1.86217 4.34507,2.79326 7.61799,2.79326 z m 26.19735,6.00974 v -61.79025 h 11.25767 l 7.87192,26.74755 8.21048,-26.74755 h 11.25768 v 61.79025 h -7.36405 v -29.20224 c 0,-2.76505 0.0282,-5.92509 0.0847,-9.48015 0.11285,-3.6115 0.25393,-7.25119 0.42322,-10.91911 0.16929,-3.66791 0.36679,-6.96903 0.5925,-9.90336 l -9.98801,31.91085 h -6.60224 l -9.5648,-31.14906 c 0.45144,4.17579 0.7618,8.74657 0.93109,13.71236 0.16929,4.9658 0.25393,10.24195 0.25393,15.82847 v 29.20224 z m 47.18912,0 v -61.79025 h 19.89138 c 5.7558,0 10.32659,1.66467 13.71235,4.994 3.4422,3.2729 5.1633,7.67441 5.1633,13.20449 0,5.5301 -1.7211,9.9598 -5.1633,13.28914 -3.38576,3.27292 -7.95655,4.90937 -13.71235,4.90937 h -12.27341 v 25.39325 z m 7.61797,-32.24944 h 12.27341 c 3.32934,0 5.98152,-1.01573 7.95655,-3.04719 2.03146,-2.08788 3.04719,-4.85294 3.04719,-8.29513 0,-3.49862 -1.01573,-6.26367 -3.04719,-8.29512 -1.97503,-2.03147 -4.62721,-3.0472 -7.95655,-3.0472 h -12.27341 z m 38.97863,32.24944 v -6.94083 h 12.61198 v -47.9086 h -12.61198 v -6.94082 h 33.01123 v 6.94082 H 222.7838 v 47.9086 h 12.61198 v 6.94083 z m 47.61234,0 v -61.79025 h 7.61797 v 54.84942 h 27.93259 v 6.94083 z m 42.9569,0 v -61.79025 h 35.55056 v 6.94082 h -28.01723 v 19.12959 h 25.05468 v 6.77153 h -25.05468 v 22.00748 l 14.41363,0.0575 -7.01461,6.95464 z"
        id="text1"
-       aria-label="COMPILE"/>
-    <text
-       xml:space="preserve"
-       style="font-size:85.1785px;text-align:start;letter-spacing:-3.1942px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#00aa88;stroke-width:0.638838"
-       x="326.76028"
-       y="316.74872"
-       id="text3"><tspan
-         id="tspan1"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.1785px;font-family:'JetBrainsMono Nerd Font';-inkscape-font-specification:'JetBrainsMono Nerd Font';letter-spacing:-3.1942px;fill:#ffffff;stroke-width:0.638838"
-         x="326.76028"
-         y="316.74872">R</tspan></text>
+       aria-label="COMPILE" />
+    <path
+       style="font-size:85.1785px;font-family:'JetBrainsMono Nerd Font';-inkscape-font-specification:'JetBrainsMono Nerd Font';letter-spacing:-3.1942px;fill:#ffffff;stroke-width:0.638838"
+       d="m 335.54601,316.67538 v -62.1803 h 19.16517 q 5.5366,0 9.71035,2.29982 4.17374,2.21464 6.47356,6.21803 2.29982,4.00338 2.29982,9.36963 0,6.30321 -3.23678,10.81767 -3.23679,4.51446 -8.60303,6.30321 l 12.6916,27.17194 h -8.43268 L 353.4335,290.27004 h -10.3066 v 26.40534 z m 7.58089,-33.30479 h 11.58428 q 4.76999,0 7.66606,-2.98125 2.89607,-3.06643 2.89607,-8.00678 0,-5.02553 -2.89607,-8.00678 -2.89607,-2.98125 -7.66606,-2.98125 H 343.1269 Z"
+       id="text3"
+       aria-label="R" />
   </g>
 </svg>

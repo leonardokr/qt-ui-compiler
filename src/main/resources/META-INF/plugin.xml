@@ -4,15 +4,26 @@
     <vendor email="leo@ziondev.us">ZionDev</vendor>
 
     <description><![CDATA[
-    <p>The <b>Qt UI Compiler</b> automates the conversion of Qt Designer <code>.ui</code> files to Python (PyQt6/PySide6).</p>
+    <p>The <b>Qt UI Compiler</b> automates the conversion of Qt Designer <code>.ui</code> files to Python code.</p>
 
+    <h3>Supported Frameworks</h3>
     <ul>
-        <li><b>Automatic Compilation:</b> Generates .py files instantly upon saving changes to the .ui file.</li>
-        <li><b>Full Integration:</b> Shortcuts and context menus for manual compilation.</li>
-        <li><b>Flexible:</b> Support for virtual environments (venv), relative paths, and glob file filters.</li>
+        <li><b>PyQt6</b> (pyuic6)</li>
+        <li><b>PySide6</b> (pyside6-uic)</li>
+        <li><b>PyQt5</b> (pyuic5)</li>
+        <li><b>PySide2</b> (pyside2-uic)</li>
+        <li><b>Native Qt</b> (uic) - for C++ projects</li>
     </ul>
 
-    <p>Configure it in <i>Settings | Tools | Qt UI Compiler</i> to get started.</p>
+    <h3>Features</h3>
+    <ul>
+        <li><b>Automatic Compilation:</b> Generates output files instantly upon saving changes to the .ui file.</li>
+        <li><b>Full Integration:</b> Shortcuts (Ctrl+Alt+U) and context menus for manual compilation.</li>
+        <li><b>Flexible:</b> Support for virtual environments (venv), relative paths, and glob file filters.</li>
+        <li><b>Cross-Platform:</b> Works on Windows, macOS, and Linux.</li>
+    </ul>
+
+    <p>Configure it in <i>Settings | Tools | Qt UI Compiler</i> to customize paths and outputs, or just get started with auto-detection.</p>
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>

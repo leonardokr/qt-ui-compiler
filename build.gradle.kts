@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.ziondev"
-version = "1.0.1"
+version = findProperty("pluginVersion")?.toString() ?: "0.0.0-dev"
 
 val envFile = file(".env")
 if (envFile.exists()) {
